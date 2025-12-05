@@ -1,2 +1,36 @@
+Change Log (2025-12-05)
+Updated summarization logic
+
 For each section: extract → summarize → check rules
 Store outputs
+
+Section Loop Logic (Updated)
+Variables
+section → current section being processed
+
+summary_level → controls the style of summary output
+
+Allowed values: "short", "detailed"
+
+Loop Steps
+Iterate through each section in the document.
+
+Extract the section title and content.
+
+Apply summarization logic based on summary_level:
+
+Case A: summary_level = "short"
+
+Generate a compact summary of the section in 1–2 sentences.
+
+Do not include bullet points.
+
+Case B: summary_level = "detailed"
+
+Generate a short paragraph summary of the section.
+
+Additionally, produce a bullet list of 3–5 key points highlighting the most important details.
+
+Output the summary for the section in the required format.
+
+Proceed to the next section until all sections are processed.
