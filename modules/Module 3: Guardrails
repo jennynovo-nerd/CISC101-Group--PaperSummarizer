@@ -1,3 +1,58 @@
+Change Log (2025-12-05)
+Added evidence_mode flag with "strict" option to enforce “only use what’s in the paper” rule.
+
+Added standardized section warning messages for missing/empty sections and very short sections (< 50 words).
+
 Evidence-only rules
 Hallucination checks
 Warnings for missing/short sections
+
+Guardrails Logic (Updated)
+Variables
+evidence_mode → controls evidence strictness
+
+Allowed values: "default", "strict"
+
+Evidence Mode Behavior
+Case A: evidence_mode = "default"
+
+Summarizer may generate summaries using normal logic.
+
+Can paraphrase and synthesize content freely, but must remain grounded in the source text.
+
+Case B: evidence_mode = "strict"
+
+Summarizer must only include claims, equations, and results explicitly present in the source text.
+
+No extrapolation, speculation, or outside knowledge.
+
+If insufficient detail is found, output the standardized message:
+
+The source text does not provide enough detail to summarize this section in strict evidence mode.
+
+Section Warning Messages
+For each section processed:
+
+If section is missing or empty → output:
+
+Section skipped: no usable text was provided.
+If section length < 50 words → output:
+
+Section very short: summary may be incomplete.
+Example Behavior
+Strict Evidence Mode Example
+
+Section: Results
+Summary: The paper reports an accuracy of 92% on the benchmark dataset.
+(If no explicit results are found)
+
+Section: Results
+The source text does not provide enough detail to summarize this section in strict evidence mode.
+Warning Example (Empty Section)
+
+Section: Methods
+Section skipped: no usable text was provided.
+Warning Example (Short Section)
+
+Section: Abstract
+Section very short: summary may be incomplete
